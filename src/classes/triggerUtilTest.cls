@@ -9,7 +9,7 @@
 @isTest
 private class triggerUtilTest {
     
-    //tests orgUtil.class
+    //tests triggerUtil.class
     static testMethod void checkStatus() {
         //create some Trigger_Status__c records
         List<Trigger_Status__c> triggerStatus = new List<Trigger_Status__c>();
@@ -17,11 +17,11 @@ private class triggerUtilTest {
         triggerStatus.add(new Trigger_Status__c(Name = 'testing2Trigger', Status__c = false));
         insert triggerStatus;
         Test.startTest();
-        Boolean determineStatus = orgUtil.isTriggerOkayToRun('testing1Trigger');
+        Boolean determineStatus = triggerUtil.isTriggerOkayToRun('testing1Trigger');
         System.assertEquals(true, determineStatus);
-        determineStatus = orgUtil.isTriggerOkayToRun('testing2Trigger');
+        determineStatus = triggerUtil.isTriggerOkayToRun('testing2Trigger');
         System.assertEquals(false, determineStatus);
-        determineStatus = orgUtil.isTriggerOkayToRun('aDifferentTrigger');
+        determineStatus = triggerUtil.isTriggerOkayToRun('aDifferentTrigger');
         System.assertEquals(true, determineStatus);
         Test.stopTest();
     }
