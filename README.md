@@ -124,7 +124,7 @@ Here are all of the methods that you can override. All of the context possibilit
 
 ## Modifications by Greg Hacic
 
-These modificatiosn were introduced on 17 August 2015
+These modifications were introduced on 17 August 2015
 
 ### New Items
 - Trigger_Status__c.object
