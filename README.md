@@ -1,13 +1,5 @@
 # Salesforce Trigger Framework
 
-Triggers should be logicless. Putting logic into your triggers creates un-testable, difficult-to-maintain code. It's widely accepted that a best-practice is to move trigger logic into a handler class.
-
-This trigger framework bundles a single **triggerHandler** base class that you can inherit from in all of your trigger handlers. The base class includes context-specific methods that are automatically called when a trigger is executed.
-
-The base class also provides a secondary role as a supervisor for Trigger execution. It acts like a watchdog, monitoring trigger activity and providing an api for controlling certain aspects of execution and control flow.
-
-But the most important part of this framework is that it's minimal and simple to use. 
-
 This trigger framework bundles a single **triggerHandler** base class that you inherit within all of your trigger handlers. The base class includes context-specific methods that are automatically called when a trigger is executed.
 
 The base class also provides a secondary role as a supervisor for Trigger execution. It acts like a watchdog, monitoring trigger activity and providing an API for controlling certain aspects of execution and control flow.
