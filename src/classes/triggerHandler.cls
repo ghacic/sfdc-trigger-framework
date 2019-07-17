@@ -1,7 +1,7 @@
 /*
 	Created by: Kevin O'Hara (kevinohara80@gmail.com)
 	Original Code: https://github.com/kevinohara80/sfdc-trigger-framework
-	Last Update: 26 June 2018 by Greg Hacic
+	Last Update: 17 July 2019 by Greg Hacic
 	Questions?: greg@ities.co
 	
 	Notes:
@@ -10,25 +10,26 @@
 		- but the most important part of this framework is that it's minimal and simple to use.
 	
 	Tests
-		- triggerHandlerTest.class (100.00% coverage)
+		- triggerHandlerTest.cls (100.00% coverage)
 */
 public virtual class triggerHandler {
 	
-	//static map of handlername, times run() was invoked
-	private static Map<String, LoopCount> loopCountMap;
-	private static Set<String> bypassedHandlers;
+	private static String handlerName; //static string of the handler class name
+	public static Map<String, LoopCount> loopCountMap; //static map of handlername, times run() was invoked
+	private static Set<String> bypassedHandlers; //set of trigger handlers that are being bypassed
 	@TestVisible private TriggerContext context; //the current context of the trigger, overridable in tests 
-	@TestVisible private Boolean isTriggerExecuting; //current context of the trigger, overridable in tests
+	@TestVisible private Boolean isTriggerExecuting; //designation for whether or not the trigger is currently executing
 	
 	//static initialization
 	static {
-		loopCountMap = new Map<String, LoopCount>();
-		bypassedHandlers = new Set<String>();
+		loopCountMap = new Map<String, LoopCount>(); //construct a new map
+		bypassedHandlers = new Set<String>(); //construct a new set
 	}
 	
 	//constructor
 	public triggerHandler() {
 		this.setTriggerContext();
+		handlerName = getHandlerName(); //grab the handler name each time the class is constructed
 	}
 	
 	/***************************************
@@ -60,12 +61,12 @@ public virtual class triggerHandler {
 		}
 	}
 	
+	//denotes the maximum number of times we want the trigger to loop		
 	public void setMaxLoopCount(Integer max) {
-		String handlerName = getHandlerName();
-		if (!TriggerHandler.loopCountMap.containsKey(handlerName)) {
-			TriggerHandler.loopCountMap.put(handlerName, new LoopCount(max));
-		} else {
-			TriggerHandler.loopCountMap.get(handlerName).setMax(max);
+		if (!TriggerHandler.loopCountMap.containsKey(handlerName)) { //if the map does NOT yet contain a key corresponding to the name of the handler class
+			TriggerHandler.loopCountMap.put(handlerName, new LoopCount(max)); //populate the map with the handler class name as the key and set the maximum loop to the passed integer
+		} else { //otherwise, the map already contains an entry for the handler class
+			TriggerHandler.loopCountMap.get(handlerName).setMax(max); //reset the maximum loop to the passed integer
 		}
 	}
 	
@@ -147,10 +148,9 @@ public virtual class triggerHandler {
 		}
 	}
 	
-	// increment the loop count
+	//increment the loop count
 	@TestVisible
 	private void addToLoopCount() {
-		String handlerName = getHandlerName();
 		if (triggerHandler.loopCountMap.containsKey(handlerName)) {
 			Boolean exceeded = triggerHandler.loopCountMap.get(handlerName).increment();
 			if (exceeded) {
@@ -163,11 +163,10 @@ public virtual class triggerHandler {
 	//make sure this trigger should continue to run
 	@TestVisible
 	private Boolean validateRun() {
-		String handlerName = getHandlerName();
 		if (!this.isTriggerExecuting || this.context == null) { //if the trigger is not executing or there is no trigger context
 			throw new triggerHandlerException('Trigger handler called outside of Trigger execution'); //throw an exception
 		}
-		if (triggerHandler.bypassedHandlers.contains(getHandlerName()) || !triggerHandler.isTriggerOkayToRun(handlerName)) { //if the trigger should be bypassed or if the trigger setting is to not fire
+		if (triggerHandler.bypassedHandlers.contains(handlerName) || !triggerHandler.isTriggerOkayToRun(handlerName)) { //if the trigger should be bypassed or if the trigger setting is to not fire
 			return false; //return false
 		}
 		return true; //return true
