@@ -1,10 +1,10 @@
 /*
 	Created by: Greg Hacic
-	Last Update: 26 June 2018 by Greg Hacic
+	Last Update: 17 July 2019 by Greg Hacic
 	Questions?: greg@ities.co
 	
 	Notes:
-		- tests at accountTriggerHandlerTest.class (100.00% coverage)
+		- tests at accountTriggerHandlerTest.cls (100.00% coverage)
 */
 trigger accountTrigger on Account (before insert, before update, before delete, after insert, after update, after delete, after undelete) {
 	

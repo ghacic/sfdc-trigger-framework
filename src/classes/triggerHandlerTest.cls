@@ -1,11 +1,11 @@
 /*
 	Created by: Kevin O'Hara (kevinohara80@gmail.com)
 	Original Code: https://github.com/kevinohara80/sfdc-trigger-framework
-	Last Update: 26 June 2018 by Greg Hacic
+	Last Update: 17 July 2019 by Greg Hacic
 	Questions?: greg@ities.co
 	
 	Notes:
-		- tests for triggerHandler.class (100.00% coverage)
+		- tests for triggerHandler.cls (100.00% coverage)
 */
 @isTest
 private class triggerHandlerTest {
@@ -18,8 +18,7 @@ private class triggerHandlerTest {
 	
 	static {
 		handler = new triggerHandlerTest.TestHandler();
-		// override its internal trigger detection
-		handler.isTriggerExecuting = true;
+		handler.isTriggerExecuting = true; //override its internal trigger detection
 	}
 	
 	/***************************************
