@@ -1,18 +1,18 @@
 /*
 	Created by: Greg Hacic
-	Last Update: 26 June 2018 by Greg Hacic
+	Last Update: 17 July 2019 by Greg Hacic
 	Questions?: greg@ities.co
 	
 	Notes:
-		- this class inherits from triggerHandler.class
-		- tests located at accountTriggerHandlerTest.class
+		- this class inherits from triggerHandler.cls
+		- tests located at accountTriggerHandlerTest.cls
 */
 public class accountTriggerHandler extends triggerHandler {
 	
-	private Map<Id, Account> newRecordMap; //map of new records
-	private Map<Id, Account> oldRecordMap; //map of old records
-	private List<Account> newRecords; //list of new records
-	private List<Account> oldRecords; //list of old records
+	private Map<Id, Account> newRecordMap; //map of new records > after context values
+	private Map<Id, Account> oldRecordMap; //map of old records > before context values
+	private List<Account> newRecords; //list of new records > after context values
+	private List<Account> oldRecords; //list of old records > before context values
 	
 	//constructor
 	public accountTriggerHandler() {
@@ -22,39 +22,39 @@ public class accountTriggerHandler extends triggerHandler {
 		oldRecords = (List<Account>)Trigger.old; //cast the list of old records
 	}
 	
-	//override the beforeInsert trigger context
+	//override the beforeInsert trigger context > Trigger.isBefore && Trigger.isInsert
 	public override void beforeInsert() {
 		//not yet implemented
 	}
 	
-	//override the beforeUpdate trigger context
+	//override the beforeUpdate trigger context > Trigger.isBefore && Trigger.isUpdate
 	public override void beforeUpdate() {
 		//not yet implemented
 	}
 	
-	//override the beforeDelete trigger context
+	//override the beforeDelete trigger context > Trigger.isBefore && Trigger.isDelete
 	public override void beforeDelete() {
 		//not yet implemented
 	}
 	
-	//override the afterInsert trigger context
+	//override the afterInsert trigger context > Trigger.isAfter && Trigger.isInsert
 	public override void afterInsert() {
-		//for (Account a : newRecords) { //for each new Account record
+		//for (Account a : newRecords) { //for each new version Account record
 			//
 		//}
 	}
 	
-	//override the afterUpdate trigger context
+	//override the afterUpdate trigger context > Trigger.isAfter && Trigger.isUpdate
 	public override void afterUpdate() {
 		//not implemented yet
 	}
 	
-	//override the afterDelete trigger context
+	//override the afterDelete trigger context > Trigger.isAfter && Trigger.isDelete
 	public override void afterDelete() {
 		//not yet implemented
 	}
 	
-	//override the afterUndelete trigger context
+	//override the afterUndelete trigger context > Trigger.isAfter && Trigger.isUndelete
 	public override void afterUndelete() {
 		//not yet implemented
 	}
