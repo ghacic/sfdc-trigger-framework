@@ -121,9 +121,11 @@ public class opportunityTriggerHandler extends triggerHandler {
 }
 ```
 
-### Trigger Status ###
+### Deactivating/Activating Triggers ###
 
-The Trigger_Status__c Custom Setting provides the option of turning a trigger on or off without having to deploy any code.
+The Trigger_Status__c Custom Setting provides the option of turning a trigger on or off without having to deploy any code. This is useful if you simply need to prevent the trigger from firing for testing or data loads and cannot easily utilize the Bypass API logic.
+
+The Custom Setting records are created automatically. So there is no need to worry about adding records manually. To see the status of any trigger handler classes:
 
 1. Navigate to **Setup** > **Develop** > **Custom Settings**.
 2. Click the **Manage** link located on the left-hand side of the Custom Setting reading **Trigger Status**.
